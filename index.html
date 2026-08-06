@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183e38">
+  <title>贵州双人慢游｜2026.08.20—08.25</title>
+  <style>
+    :root {
+      --ink: #17332e;
+      --muted: #61756f;
+      --paper: #f8f4e9;
+      --card: #fffdf7;
+      --forest: #1d5a4f;
+      --forest-2: #34796b;
+      --water: #78c9cf;
+      --water-deep: #278b9b;
+      --sun: #f2b84b;
+      --coral: #e8785d;
+      --line: #d9ded3;
+      --shadow: 0 18px 42px rgba(35, 70, 61, .12);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, rgba(120, 201, 207, .28), transparent 22rem),
+        radial-gradient(circle at 90% 18%, rgba(242, 184, 75, .22), transparent 21rem),
+        var(--paper);
+      font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+      line-height: 1.65;
+    }
+
+    button, input { font: inherit; }
+    a { color: var(--forest); text-underline-offset: 3px; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+
+    .hero { padding: 32px 0 14px; }
+    .hero-grid { display: grid; gap: 18px; }
+    .hero-copy {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(26px, 6vw, 58px);
+      border-radius: 34px;
+      background: linear-gradient(145deg, #183e38 0%, #235e53 62%, #397d70 100%);
+      color: #fffdf6;
+      box-shadow: var(--shadow);
+    }
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      width: 240px; height: 240px;
+      right: -86px; top: -100px;
+      border: 38px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+    .eyebrow { margin: 0 0 8px; letter-spacing: .14em; font-size: 13px; opacity: .82; }
+    h1 { margin: 0; max-width: 760px; font-size: clamp(34px, 8vw, 76px); line-height: 1.02; letter-spacing: -.04em; }
+    .hero-sub { max-width: 760px; margin: 18px 0 0; font-size: clamp(16px, 2.4vw, 21px); color: rgba(255,255,255,.86); }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
+    .pill { padding: 7px 12px; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); font-size: 13px; }
+
+    .nav {
+      display: flex; gap: 8px; overflow-x: auto; padding: 14px 0 8px;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      flex: 0 0 auto; padding: 9px 14px; color: var(--ink); text-decoration: none;
+      background: rgba(255,255,255,.58); border: 1px solid rgba(29,90,79,.14); border-radius: 999px;
+    }
+
+    section { padding: 34px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
+    h2 { margin: 0; font-size: clamp(27px, 5vw, 43px); line-height: 1.1; letter-spacing: -.03em; }
+    h3 { margin: 0; font-size: 20px; line-height: 1.35; }
+    .section-note { margin: 5px 0 0; color: var(--muted); }
+    .tiny { color: var(--muted); font-size: 12px; }
+
+    .route-map {
+      position: relative; overflow: hidden; border-radius: 32px; background: #dff2ed;
+      border: 1px solid rgba(29,90,79,.12); box-shadow: var(--shadow);
+    }
+    .route-map svg { display: block; width: 100%; height: auto; }
+    .map-caption {
+      position: absolute; left: 16px; bottom: 14px; margin: 0; padding: 6px 10px;
+      border-radius: 999px; background: rgba(255,253,247,.86); color: var(--muted); font-size: 12px;
+      backdrop-filter: blur(8px);
+    }
+    .route-line { stroke-dasharray: 10 9; animation: travel 18s linear infinite; }
+    @keyframes travel { to { stroke-dashoffset: -190; } }
+    @media (prefers-reduced-motion: reduce) { .route-line { animation: none; } }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 14px; }
+    .summary-card { padding: 17px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; }
+    .summary-card span { display: block; color: var(--muted); font-size: 12px; }
+    .summary-card strong { display: block; margin-top: 3px; font-size: 17px; }
+
+    .mode-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      margin: 0 0 18px; padding: 14px 16px; background: #e7efe6; border-radius: 18px;
+    }
+    .switch { display: inline-flex; align-items: center; gap: 9px; cursor: pointer; font-weight: 700; }
+    .switch input { width: 20px; height: 20px; accent-color: var(--forest); }
+    body.relaxed [data-optional="true"] { display: none !important; }
+
+    .timeline { position: relative; display: grid; gap: 15px; }
+    .day {
+      display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 14px; padding: 20px;
+      background: rgba(255,253,247,.86); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: 0 8px 26px rgba(35,70,61,.07);
+    }
+    .day-date { text-align: center; }
+    .day-date b { display: block; font-size: 26px; line-height: 1; color: var(--forest); }
+    .day-date span { font-size: 12px; color: var(--muted); }
+    .day-tag { display: inline-flex; align-items: center; margin-bottom: 5px; color: var(--coral); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+    .day-title { margin-bottom: 11px; }
+    .events { display: grid; gap: 10px; }
+    .event { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+    .event:first-child { border-top: 0; padding-top: 0; }
+    .event time { color: var(--forest); font-weight: 700; font-size: 13px; }
+    .event p { margin: 0; }
+    .optional { color: var(--muted); }
+    .warning { margin-top: 12px; padding: 11px 13px; background: #fff0dc; border-left: 4px solid var(--sun); border-radius: 10px; font-size: 13px; }
+    .critical { background: #ffe9e2; border-left-color: var(--coral); }
+
+    .cards { display: grid; gap: 14px; }
+    .info-card { padding: 20px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+    .info-card p { margin: 8px 0 0; color: var(--muted); }
+    .info-card ul { margin: 12px 0 0; padding-left: 20px; }
+    .route-steps { display: grid; gap: 8px; margin-top: 15px; }
+    .route-step { display: flex; gap: 10px; align-items: flex-start; }
+    .step-num { flex: 0 0 auto; display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; background: var(--forest); color: white; font-size: 12px; }
+
+    details { margin-top: 13px; border-top: 1px dashed var(--line); padding-top: 12px; }
+    summary { cursor: pointer; color: var(--forest); font-weight: 700; }
+
+    .food-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .food { padding: 16px; border-radius: 18px; background: #fff8e6; border: 1px solid #efdfba; }
+    .food b { display: block; }
+    .food small { color: var(--muted); }
+    .food.no { background: #f7ece9; border-color: #ecd0c8; }
+
+    .check-wrap { padding: 22px; background: var(--forest); color: #fff; border-radius: 30px; box-shadow: var(--shadow); }
+    .check-top { display: flex; justify-content: space-between; gap: 15px; align-items: center; }
+    .progress { height: 9px; margin: 15px 0 20px; overflow: hidden; background: rgba(255,255,255,.18); border-radius: 999px; }
+    .progress span { display: block; width: 0; height: 100%; background: var(--sun); transition: width .25s ease; }
+    .checklist { display: grid; gap: 10px; }
+    .checkitem { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; padding: 11px 12px; background: rgba(255,255,255,.08); border-radius: 13px; cursor: pointer; }
+    .checkitem input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--sun); }
+    .checkitem small { display: block; color: rgba(255,255,255,.68); }
+
+    .budget { display: grid; gap: 14px; }
+    .calc { padding: 22px; border-radius: 26px; background: var(--card); border: 1px solid var(--line); }
+    .calc-grid { display: grid; grid-template-columns: 1fr 112px; gap: 12px; align-items: center; margin-top: 12px; }
+    .calc input { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: #fff; }
+    .total { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--line); }
+    .total strong { display: block; font-size: 31px; color: var(--forest); }
+    .cost-list { display: grid; gap: 9px; margin-top: 13px; }
+    .cost-row { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+
+    .sources { font-size: 13px; color: var(--muted); }
+    .sources li { margin-bottom: 8px; }
+    footer { padding: 24px 0 46px; color: var(--muted); text-align: center; font-size: 13px; }
+
+    @media (min-width: 760px) {
+      .hero-grid { grid-template-columns: 1.1fr .9fr; align-items: stretch; }
+      .route-map { min-height: 100%; }
+      .summary-grid { grid-template-columns: repeat(4, 1fr); }
+      .cards { grid-template-columns: repeat(3, 1fr); }
+      .food-grid { grid-template-columns: repeat(4, 1fr); }
+      .budget { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 540px) {
+      .wrap { width: min(100% - 22px, 1120px); }
+      .hero { padding-top: 12px; }
+      .hero-copy { border-radius: 25px; }
+      .day { grid-template-columns: 53px minmax(0, 1fr); padding: 16px 14px; gap: 10px; }
+      .day-date b { font-size: 22px; }
+      .event { grid-template-columns: 48px minmax(0, 1fr); }
+      .section-head { display: block; }
+      .mode-bar { align-items: flex-start; }
+    }
+    @media print {
+      body { background: #fff; }
+      .nav, .mode-bar, .check-wrap, .calc { display: none !important; }
+      .hero-copy, .route-map, .day, .info-card { box-shadow: none; break-inside: avoid; }
+      section { padding: 18px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">TWO PEOPLE · SIX DAYS · GUIZHOU</p>
+        <h1>喀斯特<br>恋爱试炼</h1>
+        <p class="hero-sub">福州出发的贵州双人路线：黄果树、小七孔、西江苗寨三个重点，一晚一地，不再额外堆景点。</p>
+        <div class="hero-pills">
+          <span class="pill">2026.08.20—08.25</span>
+          <span class="pill">2 人</span>
+          <span class="pill">3 个核心景区</span>
+          <span class="pill">大床房待补</span>
+        </div>
+      </div>
+
+      <figure class="route-map" aria-labelledby="map-title">
+        <svg viewBox="0 0 760 620" role="img">
+          <title id="map-title">贵州卡通路线示意图：贵阳到黄果树、荔波小七孔、西江千户苗寨后返回贵阳</title>
+          <defs>
+            <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#174a40" flood-opacity=".16"/>
+            </filter>
+            <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#e8785d"/>
+            </marker>
+          </defs>
+
+          <rect width="760" height="620" fill="#dff2ed"/>
+          <circle cx="92" cy="92" r="42" fill="#f2b84b" opacity=".82"/>
+          <g opacity=".42" fill="#fff">
+            <ellipse cx="255" cy="90" rx="72" ry="24"/><ellipse cx="320" cy="91" rx="52" ry="19"/>
+            <ellipse cx="600" cy="140" rx="61" ry="21"/><ellipse cx="650" cy="143" rx="45" ry="17"/>
+          </g>
+
+          <!-- 卡通省域轮廓：路线示意，不按比例 -->
+          <path d="M176 111 C235 73 286 97 330 80 C379 61 411 101 459 97 C517 93 529 132 581 152 C632 172 615 220 648 254 C673 280 642 319 650 361 C660 414 608 431 590 473 C570 520 520 508 480 538 C441 568 395 535 351 548 C309 561 278 523 236 507 C192 490 195 448 159 420 C120 390 146 344 121 306 C98 270 130 233 133 194 C137 153 151 131 176 111 Z"
+                fill="#90cf99" stroke="#397d70" stroke-width="7" stroke-linejoin="round" filter="url(#softShadow)"/>
+          <path d="M155 403 Q224 342 284 405 T413 394 T588 432" fill="none" stroke="#67b7c4" stroke-width="18" stroke-linecap="round" opacity=".75"/>
+          <g fill="#397d70" opacity=".72">
+            <path d="M177 278 l35 -58 37 58z"/><path d="M217 278 l49 -78 47 78z"/><path d="M514 323 l39 -65 40 65z"/>
+          </g>
+          <g fill="#fff" opacity=".86"><path d="M238 246 l28 -46 27 46 -18 -11 -10 11 -10 -12z"/><path d="M539 282 l14 -24 15 24 -10 -6 -6 7z"/></g>
+
+          <!-- 路线 -->
+          <path class="route-line" d="M372 218 C285 222 228 268 202 337 C263 391 371 427 485 429 C548 420 567 352 550 282 C505 230 435 202 372 218"
+                fill="none" stroke="#e8785d" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+          <!-- 贵阳 -->
+          <g transform="translate(372 218)">
+            <circle r="17" fill="#fffdf7" stroke="#17332e" stroke-width="6"/>
+            <circle r="6" fill="#e8785d"/>
+            <rect x="-58" y="-60" width="116" height="35" rx="17" fill="#17332e"/>
+            <text x="0" y="-37" fill="#fff" font-size="20" font-weight="700" text-anchor="middle">贵阳</text>
+            <text x="0" y="45" fill="#17332e" font-size="15" font-weight="700" text-anchor="middle">起点 / 终点</text>
+          </g>
+
+          <!-- 黄果树 -->
+          <g transform="translate(202 337)">
+            <circle r="16" fill="#fffdf7" stroke="#17332e" stroke-width="5"/>
+            <path d="M-39 -63 h54 c3 15 -5 30 -14 38 -10 9 -7 22 -17 29 -13 -13 -6 -28 -16 -37 -8 -8 -10 -18 -7 -30z" fill="#78c9cf" stroke="#278b9b" stroke-width="3"/>
+            <text x="0" y="45" fill="#17332e" font-size="19" font-weight="700" text-anchor="middle">黄果树</text>
+          </g>
+
+          <!-- 小七孔 -->
+          <g transform="translate(485 429)">
+            <circle r="16" fill="#fffdf7" stroke="#17332e" stroke-width="5"/>
+            <path d="M-42 -34 q42 -43 84 0 v15 h-14 v-13 q-28 -25 -56 0 v13 h-14z" fill="#fff3da" stroke="#17332e" stroke-width="4"/>
+            <path d="M-50 -16 h100" stroke="#278b9b" stroke-width="7" stroke-linecap="round"/>
+            <text x="0" y="50" fill="#17332e" font-size="19" font-weight="700" text-anchor="middle">荔波小七孔</text>
+          </g>
+
+          <!-- 苗寨 -->
+          <g transform="translate(550 282)">
+            <circle r="16" fill="#fffdf7" stroke="#17332e" stroke-width="5"/>
+            <g transform="translate(-37 -67)" stroke="#17332e" stroke-width="4" stroke-linejoin="round">
+              <path d="M0 27 L37 0 L74 27 Z" fill="#e8785d"/>
+              <path d="M9 27 h56 v41 h-56z" fill="#f2b84b"/>
+              <path d="M-4 42 h82"/><path d="M19 68 v18 M55 68 v18"/>
+            </g>
+            <text x="0" y="48" fill="#17332e" font-size="19" font-weight="700" text-anchor="middle">西江苗寨</text>
+          </g>
+
+          <g transform="translate(95 505)">
+            <path d="M0 28 C26 8 50 15 71 31 C45 41 25 46 0 28Z" fill="#fffdf7" stroke="#17332e" stroke-width="4"/>
+            <path d="M27 16 L43 0 L48 22" fill="#e8785d" stroke="#17332e" stroke-width="4"/>
+            <text x="34" y="72" fill="#17332e" font-size="14" font-weight="700" text-anchor="middle">福州飞来</text>
+          </g>
+        </svg>
+        <figcaption class="map-caption">卡通线路示意 · 地理位置不按比例</figcaption>
+      </figure>
+    </div>
+
+    <nav class="nav" aria-label="页面目录">
+      <a href="#route">逐日路线</a><a href="#spots">景区策略</a><a href="#food">吃什么</a><a href="#book">预约清单</a><a href="#budget">预算</a><a href="#sources">信息来源</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap" aria-label="行程摘要">
+      <div class="summary-grid">
+        <div class="summary-card"><span>去程航班</span><strong>MF8439 · 17:55—20:20</strong></div>
+        <div class="summary-card"><span>核心玩法</span><strong>瀑布＋碧水＋苗寨夜景</strong></div>
+        <div class="summary-card"><span>换酒店</span><strong>贵阳 → 荔波 → 西江 → 贵阳</strong></div>
+        <div class="summary-card"><span>饮食备注</span><strong>能吃辣 · 不要折耳根和内脏</strong></div>
+      </div>
+    </section>
+
+    <section id="route" class="wrap">
+      <div class="section-head">
+        <div><h2>逐日路线</h2><p class="section-note">把“必须去”排牢，把城市打卡做成可选。</p></div>
+      </div>
+
+      <div class="mode-bar">
+        <div><strong>轻松模式</strong><div class="tiny">打开后隐藏所有可选加项，只看主线。</div></div>
+        <label class="switch"><input id="relaxedToggle" type="checkbox">开启</label>
+      </div>
+
+      <div class="timeline">
+        <article class="day">
+          <div class="day-date"><b>20</b><span>周四<br>抵达日</span></div>
+          <div>
+            <span class="day-tag">DAY 1 · 福州 → 贵阳</span>
+            <h3 class="day-title">晚到不赶景点，先把节奏放慢</h3>
+            <div class="events">
+              <div class="event"><time>17:55</time><p>厦航 MF8439 从福州长乐起飞。</p></div>
+              <div class="event"><time>20:20</time><p>计划抵达贵阳龙洞堡 T3；取行李后打车或地铁 2 号线进市区。</p></div>
+              <div class="event"><time>21:40</time><p>入住贵阳市区大床房，酒店暂留待选。</p></div>
+              <div class="event" data-optional="true"><time>22:00</time><p class="optional">若不累：酒店附近吃花溪牛肉粉或清汤小吃；不跨城追夜景。</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-date"><b>21</b><span>周五<br>瀑布日</span></div>
+          <div>
+            <span class="day-tag">DAY 2 · 黄果树</span>
+            <h3 class="day-title">景区直通车往返，走三大景点精华版</h3>
+            <div class="events">
+              <div class="event"><time>06:30</time><p>按最终上车点出发；建议早餐提前打包，直通车班次以购票页为准。</p></div>
+              <div class="event"><time>09:00</time><p>抵达后换乘观光车。建议顺序随客流调整：陡坡塘 → 天星桥下半程 → 大瀑布。</p></div>
+              <div class="event"><time>12:00</time><p>天星桥重点保留银链坠潭瀑布一带；不追求把上、下半程全部走完。</p></div>
+              <div class="event"><time>15:00</time><p>大瀑布主景；若预约成功，按时段走水帘洞。</p></div>
+              <div class="event"><time>18:00</time><p>集合返贵阳，晚餐吃丝娃娃或贵州辣子鸡（备注不加折耳根）。</p></div>
+            </div>
+            <div class="warning critical">水帘洞必须在“安旅通”免费预约。旺季排队可达 60–90 分钟；没约上也不要买所谓“代预约”。</div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-date"><b>22</b><span>周六<br>玩水日</span></div>
+          <div>
+            <span class="day-tag">DAY 3 · 贵阳 → 荔波小七孔</span>
+            <h3 class="day-title">早班高铁进荔波，从西向东一路下坡</h3>
+            <div class="events">
+              <div class="event"><time>07:00</time><p>贵阳东/北站乘高铁前往荔波；目标是 10:00 前抵达，不先锁死车次。</p></div>
+              <div class="event"><time>09:30</time><p>荔波站转景区接驳至东门，寄存行李后入园；先乘观光车到西门。</p></div>
+              <div class="event"><time>10:30</time><p>卧龙潭 → 鸳鸯湖 → 翠谷瀑布 → 石上森林 → 68 级跌水瀑布 → 拉雅瀑布 → 小七孔古桥。</p></div>
+              <div class="event" data-optional="true"><time>13:00</time><p class="optional">鸳鸯湖划船为可选；排队过长就跳过。</p></div>
+              <div class="event"><time>17:30</time><p>东门出园，住东门/梦柳布依小镇附近，晚餐考虑豆花烤鱼。</p></div>
+            </div>
+            <div class="warning">截至 2026-07-20，水上森林仍因生态修复暂时关闭；8月出发前再次查看官方公告。</div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-date"><b>23</b><span>周日<br>苗寨日</span></div>
+          <div>
+            <span class="day-tag">DAY 4 · 荔波 → 西江千户苗寨</span>
+            <h3 class="day-title">直通车换来完整午后，苗服和夜景都有</h3>
+            <div class="events">
+              <div class="event"><time>08:20</time><p>早餐、退房，提前到确认后的上车点。</p></div>
+              <div class="event"><time>09:10</time><p>乘小七孔/荔波至西江苗寨景区直通车，预计 3–4 小时。</p></div>
+              <div class="event"><time>13:00</time><p>抵达、入寨、寄存或入住；午餐吃酸汤鱼，先确认汤底无内脏。</p></div>
+              <div class="event"><time>15:00</time><p>租苗服自行拍照：风雨桥、田园区、嘎歌古巷一带更适合边走边拍。</p></div>
+              <div class="event"><time>19:20</time><p>日落前上观景台占位，蓝调时刻到亮灯后都看完再下山。</p></div>
+              <div class="event" data-optional="true"><time>21:00</time><p class="optional">体力尚可再沿白水河散步；不为“长桌宴”专门排队。</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-date"><b>24</b><span>周一<br>返城日</span></div>
+          <div>
+            <span class="day-tag">DAY 5 · 西江 → 凯里南 → 贵阳</span>
+            <h3 class="day-title">用清晨避开人群，午后回贵阳</h3>
+            <div class="events">
+              <div class="event"><time>07:20</time><p>清晨寨内散步，风雨桥和河岸比午后安静得多。</p></div>
+              <div class="event"><time>09:30</time><p>退房，乘景区直通车/网约车前往凯里南站，预留约 1 小时。</p></div>
+              <div class="event"><time>11:30</time><p>凯里南乘高铁回贵阳北，具体车次待 12306 放票后确定。</p></div>
+              <div class="event"><time>14:00</time><p>入住贵阳大床房，休息和补给。</p></div>
+              <div class="event" data-optional="true"><time>18:00</time><p class="optional">只选一组：甲秀楼河畔夜景＋附近晚餐；不再叠加黔灵山或青岩。</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-date"><b>25</b><span>周二<br>返程日</span></div>
+          <div>
+            <span class="day-tag">DAY 6 · 贵阳 → 福州</span>
+            <h3 class="day-title">上午留白，航班确定后再微调</h3>
+            <div class="events">
+              <div class="event"><time>09:00</time><p>睡到自然醒，吃脆哨糯米饭或花溪牛肉粉。</p></div>
+              <div class="event" data-optional="true"><time>10:30</time><p class="optional">若前一晚没去，可在甲秀楼/南明河附近短走；否则咖啡、买伴手礼。</p></div>
+              <div class="event"><time>12:30</time><p>午餐后回酒店取行李。</p></div>
+              <div class="event"><time>14:00</time><p>暂按 17:00 起飞倒推前往龙洞堡机场；返程出票后更新。</p></div>
+            </div>
+            <div class="warning">返程尚未出票。若最终航班早于 16:30，取消上午散步并相应提前去机场。</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="spots" class="wrap">
+      <div class="section-head"><div><h2>三个景区，怎么取舍</h2><p class="section-note">都去，但不意味着每个角落都必须走完。</p></div></div>
+      <div class="cards">
+        <article class="info-card">
+          <h3>黄果树｜保大瀑布和下半程</h3>
+          <p>三大景点官方完整游览时长合计远超一日。直通车当天采用精华版，不追求“全走”。</p>
+          <div class="route-steps">
+            <div class="route-step"><span class="step-num">1</span><span>陡坡塘：控制在约 45–60 分钟。</span></div>
+            <div class="route-step"><span class="step-num">2</span><span>天星桥：重点走下半程；累了就放弃上半程。</span></div>
+            <div class="route-step"><span class="step-num">3</span><span>大瀑布：必须保留；水帘洞看预约和排队。</span></div>
+          </div>
+          <details><summary>体力不足时怎么删</summary><p>先删天星桥上半程，再删水帘洞长队；大瀑布主观景和银链坠潭优先级最高。</p></details>
+        </article>
+
+        <article class="info-card">
+          <h3>小七孔｜西门进、东门出</h3>
+          <p>坐车到西门后一路向东，多数路段顺势下行；终点正好回东门住宿，少走回头路。</p>
+          <div class="route-steps">
+            <div class="route-step"><span class="step-num">1</span><span>卧龙潭与小七孔古桥是两端核心。</span></div>
+            <div class="route-step"><span class="step-num">2</span><span>鸳鸯湖划船看排队，不做必选。</span></div>
+            <div class="route-step"><span class="step-num">3</span><span>穿防滑鞋；另带凉鞋或防滑拖鞋。</span></div>
+          </div>
+          <details><summary>天气不好怎么办</summary><p>汛期开放范围会动态变化。若临时闭园，不冒险进封闭区域，优先改为荔波县城休整并提前确认去西江的直通车。</p></details>
+        </article>
+
+        <article class="info-card">
+          <h3>西江｜住一晚才不赶</h3>
+          <p>午后拍苗服、傍晚看日落和万家灯火、次日看清晨，是住一晚的完整价值。</p>
+          <div class="route-steps">
+            <div class="route-step"><span class="step-num">1</span><span>租苗服自行拍，不订 2–3 小时旅拍套餐。</span></div>
+            <div class="route-step"><span class="step-num">2</span><span>住宿优先平缓路段，观景房后续再挑。</span></div>
+            <div class="route-step"><span class="step-num">3</span><span>长桌宴偏体验型，不列为必吃。</span></div>
+          </div>
+          <details><summary>拍照时间建议</summary><p>15:00 后光线更柔和；苗服归还时间要提前问清。观景台建议日落前约 40 分钟抵达。</p></details>
+        </article>
+      </div>
+    </section>
+
+    <section id="food" class="wrap">
+      <div class="section-head"><div><h2>吃什么</h2><p class="section-note">能吃辣，但所有蘸水都先说：不要折耳根，不吃内脏。</p></div></div>
+      <div class="food-grid">
+        <div class="food"><b>酸汤鱼</b><small>苗寨主菜；问清计价和鱼重</small></div>
+        <div class="food"><b>丝娃娃</b><small>贵阳小吃；蘸水单独放</small></div>
+        <div class="food"><b>花溪牛肉粉</b><small>早餐友好，接受度高</small></div>
+        <div class="food"><b>脆哨糯米饭</b><small>确认脆哨可接受再加</small></div>
+        <div class="food"><b>安顺裹卷</b><small>黄果树沿线代表小吃</small></div>
+        <div class="food"><b>荔波豆花烤鱼</b><small>小七孔出园后的晚餐</small></div>
+        <div class="food no"><b>肠旺面</b><small>含大肠和血旺，本次跳过</small></div>
+        <div class="food no"><b>折耳根蘸水</b><small>点单时明确不要添加</small></div>
+      </div>
+    </section>
+
+    <section id="book" class="wrap">
+      <div class="check-wrap">
+        <div class="check-top"><div><h2>预约清单</h2><span class="tiny" style="color:rgba(255,255,255,.72)">勾选结果会保存在当前浏览器。</span></div><strong id="progressText">0 / 10</strong></div>
+        <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+        <div class="checklist" id="checklist">
+          <label class="checkitem"><input type="checkbox" data-id="return-flight"><span>购买 8月25日返程机票<small>出票后补航班号、起飞时间与机场出发时间</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="guiyang-hotel"><span>贵阳大床房 × 3 晚<small>8/20、8/21、8/24；先选可取消，直通车上车点确定后锁位置</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="libo-hotel"><span>荔波东门大床房 × 1 晚<small>8/22；优先小七孔东门/梦柳布依小镇</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="xijiang-hotel"><span>西江苗寨大床房 × 1 晚<small>8/23；先确认从哪个门入寨、是否接送行李</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="huangguoshu-bus"><span>黄果树景区直通车往返<small>8/21；核实贵阳上车点、集合时间和返程时间</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="huangguoshu-ticket"><span>黄果树门票＋观光车＋水帘洞预约<small>“安旅通”最多提前 15 天；水帘洞预约免费</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="libo-train"><span>8/22 贵阳 → 荔波高铁<small>12306 放票即订，目标 10:00 前到荔波</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="xiaoqikong-ticket"><span>小七孔门票＋观光车<small>预约 8/22 入园时段，并在出发前查开放公告</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="libo-xijiang-bus"><span>8/23 荔波/小七孔 → 西江直通车<small>优先约 09:10 班次；下单页再次确认上车点</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="xijiang-return"><span>8/24 西江 → 凯里南接驳＋凯里南 → 贵阳高铁<small>接驳和高铁之间预留至少 45–60 分钟</small></span></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="budget" class="wrap">
+      <div class="section-head"><div><h2>预算估算</h2><p class="section-note">不含往返机票；酒店可按后续选择即时计算。</p></div></div>
+      <div class="budget">
+        <div class="calc">
+          <h3>把酒店价格补进去</h3>
+          <div class="calc-grid"><label for="gyRate">贵阳每晚</label><input id="gyRate" inputmode="numeric" type="number" min="0" value="0" aria-label="贵阳酒店每晚价格"></div>
+          <div class="calc-grid"><label for="liboRate">荔波每晚</label><input id="liboRate" inputmode="numeric" type="number" min="0" value="0" aria-label="荔波酒店每晚价格"></div>
+          <div class="calc-grid"><label for="xjRate">西江每晚</label><input id="xjRate" inputmode="numeric" type="number" min="0" value="0" aria-label="西江酒店每晚价格"></div>
+          <div class="total"><span>两人全程预估</span><strong id="grandTotal">¥2,600–3,500</strong><small class="tiny">基础地接＋餐饮＋你填写的 5 晚住宿；不含机票和大额购物。</small></div>
+        </div>
+        <div class="info-card">
+          <h3>两人基础开销参考</h3>
+          <div class="cost-list">
+            <div class="cost-row"><span>三景区门票＋必要观光车</span><strong>约 ¥960</strong></div>
+            <div class="cost-row"><span>跨城高铁、直通车与接驳</span><strong>约 ¥800–1,100</strong></div>
+            <div class="cost-row"><span>6 天餐饮</span><strong>约 ¥700–1,000</strong></div>
+            <div class="cost-row"><span>苗服租赁、扶梯等可选项</span><strong>约 ¥140–440</strong></div>
+          </div>
+          <p>合计约 ¥2,600–3,500，再加 5 晚酒店和往返机票。交通与苗服价格按平台实时价调整。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources" class="wrap sources">
+      <div class="section-head"><div><h2>核对依据</h2><p class="section-note">页面信息核对于 2026-08-06；景区汛期状态和班次仍需临行前复查。</p></div></div>
+      <ol>
+        <li><a href="https://movement.gzstv.com/news/detail/HPzWJ9/" target="_blank" rel="noreferrer">黄果树景区 2026 暑期开闭园、预约和水帘洞须知</a>：06:30 开园，门票提前 1–15 天预约，水帘洞唯一官方预约渠道为“安旅通”。</li>
+        <li><a href="https://www.gzstv.com/a/20c4d80385124bd7b8154ad69aef9f08" target="_blank" rel="noreferrer">小七孔 2026-07-20 恢复正常开放公告</a>：常规票价 120 元、观光车 40 元，水上森林暂时关闭。</li>
+        <li><a href="https://www.gzstv.com/a/55fd2986cf6c4f168ffc1786a7f47901" target="_blank" rel="noreferrer">小七孔营业时间通告</a>：08:00 开始入园、16:30 停止入园，实行分时预约。</li>
+        <li><a href="https://fgw.guizhou.gov.cn/zwgk/zdlyxx/jffw/zcwj/202601/t20260121_89413554.html" target="_blank" rel="noreferrer">贵州省发展改革委 2026 景区价格清单</a>：用于门票和景区交通预算核对。</li>
+        <li><a href="https://www.xjqhmz.com/news/detail?id=958772957063258114&type=news-notice" target="_blank" rel="noreferrer">西江千户苗寨官方游览线路</a>：用于观景台、风雨桥和核心寨区的动线安排。</li>
+        <li><a href="https://ae.trip.com/flights/status-mf8439/" target="_blank" rel="noreferrer">MF8439 航班计划</a>：17:55 福州起飞、20:20 计划抵达贵阳 T3；最终以航司通知为准。</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="wrap">第一版攻略 · 酒店、返程航班与实际车次确认后继续更新</footer>
+
+  <script>
+    (() => {
+      const body = document.body;
+      const relaxedToggle = document.getElementById('relaxedToggle');
+      const checklist = Array.from(document.querySelectorAll('#checklist input[type="checkbox"]'));
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      const hotelInputs = ['gyRate', 'liboRate', 'xjRate'].map((id) => document.getElementById(id));
+      const grandTotal = document.getElementById('grandTotal');
+
+      const read = (key, fallback) => {
+        try { return localStorage.getItem(key) ?? fallback; } catch (_) { return fallback; }
+      };
+      const write = (key, value) => {
+        try { localStorage.setItem(key, value); } catch (_) { /* Local files may block storage. */ }
+      };
+
+      const savedMode = read('guizhou-relaxed', 'false') === 'true';
+      relaxedToggle.checked = savedMode;
+      body.classList.toggle('relaxed', savedMode);
+      relaxedToggle.addEventListener('change', () => {
+        body.classList.toggle('relaxed', relaxedToggle.checked);
+        write('guizhou-relaxed', String(relaxedToggle.checked));
+      });
+
+      const updateProgress = () => {
+        const done = checklist.filter((item) => item.checked).length;
+        const percent = checklist.length ? Math.round(done / checklist.length * 100) : 0;
+        progressText.textContent = `${done} / ${checklist.length}`;
+        progressBar.style.width = `${percent}%`;
+      };
+
+      checklist.forEach((item) => {
+        item.checked = read(`guizhou-check-${item.dataset.id}`, 'false') === 'true';
+        item.addEventListener('change', () => {
+          write(`guizhou-check-${item.dataset.id}`, String(item.checked));
+          updateProgress();
+        });
+      });
+      updateProgress();
+
+      const calculate = () => {
+        const gy = Math.max(0, Number(hotelInputs[0].value) || 0) * 3;
+        const libo = Math.max(0, Number(hotelInputs[1].value) || 0);
+        const xijiang = Math.max(0, Number(hotelInputs[2].value) || 0);
+        const hotel = gy + libo + xijiang;
+        const low = 2600 + hotel;
+        const high = 3500 + hotel;
+        grandTotal.textContent = `¥${low.toLocaleString('zh-CN')}–${high.toLocaleString('zh-CN')}`;
+      };
+
+      hotelInputs.forEach((input) => {
+        const stored = read(`guizhou-rate-${input.id}`, '0');
+        input.value = stored;
+        input.addEventListener('input', () => {
+          write(`guizhou-rate-${input.id}`, input.value);
+          calculate();
+        });
+      });
+      calculate();
+    })();
+  </script>
+</body>
+</html>
