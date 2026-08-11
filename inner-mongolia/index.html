@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c3a">
+  <meta name="description" content="从哈尔滨夜行至呼伦贝尔，再去阿尔山的 8 日内蒙古旅行计划。">
+  <title>向北，去草原｜内蒙古 8 日旅行计划</title>
+  <style>
+    :root {
+      --ink: #153b38;
+      --muted: #667c76;
+      --paper: #f5f0e5;
+      --card: #fffdf7;
+      --grass: #668858;
+      --grass-deep: #2e6157;
+      --sky: #91c9d0;
+      --sky-deep: #4c99a7;
+      --sun: #f0b74f;
+      --rust: #c76b46;
+      --sand: #e6d3a9;
+      --line: rgba(21, 59, 56, .15);
+      --shadow: 0 20px 54px rgba(28, 60, 55, .13);
+      --radius: 26px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 6% 6%, rgba(145, 201, 208, .3), transparent 25rem),
+        radial-gradient(circle at 94% 22%, rgba(240, 183, 79, .2), transparent 24rem),
+        var(--paper);
+      font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-underline-offset: 3px; }
+    button, input, select { font: inherit; }
+    .wrap { width: min(1140px, calc(100% - 34px)); margin: 0 auto; }
+    .skip-link { position: fixed; left: 12px; top: -80px; z-index: 30; padding: 9px 13px; border-radius: 10px; background: white; }
+    .skip-link:focus { top: 12px; }
+
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 20px 0 12px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; text-decoration: none; }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: white; }
+    .back-link { color: var(--muted); font-size: 14px; }
+
+    .hero { padding-bottom: 22px; }
+    .hero-grid { display: grid; gap: 16px; }
+    .hero-copy {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(28px, 6.5vw, 66px);
+      min-height: 470px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-radius: 38px;
+      color: #fffdf6;
+      background: linear-gradient(150deg, #173c3a 0%, #285b52 55%, #63845e 100%);
+      box-shadow: var(--shadow);
+    }
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      opacity: .22;
+      background-image: repeating-linear-gradient(115deg, transparent 0 35px, rgba(255,255,255,.09) 35px 36px);
+    }
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 480px;
+      height: 480px;
+      right: -170px;
+      top: -225px;
+      border: 68px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+    .eyebrow { margin: 0 0 12px; font-size: 12px; letter-spacing: .2em; color: rgba(255,255,255,.72); }
+    h1 { margin: 0; max-width: 700px; font-size: clamp(45px, 9vw, 92px); line-height: .98; letter-spacing: -.065em; }
+    h1 span { display: block; margin-top: 10px; font-size: .44em; letter-spacing: .04em; color: #f3d38e; }
+    .hero-sub { max-width: 730px; margin: 22px 0 0; color: rgba(255,255,255,.82); font-size: clamp(16px, 2.3vw, 20px); }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .pill { padding: 7px 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(255,255,255,.1); font-size: 13px; }
+
+    .route-card {
+      position: relative;
+      min-height: 470px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 38px;
+      background: #dcebea;
+      box-shadow: var(--shadow);
+    }
+    .route-card svg { display: block; width: 100%; height: 100%; min-height: 470px; }
+    .route-caption { position: absolute; left: 18px; bottom: 16px; margin: 0; padding: 7px 11px; border-radius: 999px; background: rgba(255,253,247,.84); color: var(--muted); font-size: 12px; backdrop-filter: blur(8px); }
+    .route-dash { stroke-dasharray: 10 9; animation: route 20s linear infinite; }
+    @keyframes route { to { stroke-dashoffset: -190; } }
+
+    .quick-nav { position: sticky; top: 0; z-index: 10; background: rgba(245,240,229,.88); border-bottom: 1px solid rgba(21,59,56,.08); backdrop-filter: blur(14px); }
+    .quick-nav-inner { display: flex; gap: 8px; overflow-x: auto; padding: 11px 0; scrollbar-width: none; }
+    .quick-nav-inner::-webkit-scrollbar { display: none; }
+    .quick-nav a { flex: 0 0 auto; padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.58); text-decoration: none; font-size: 14px; }
+
+    section { padding: 40px 0; scroll-margin-top: 62px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 19px; }
+    h2 { margin: 0; font-size: clamp(30px, 5vw, 47px); line-height: 1.08; letter-spacing: -.04em; }
+    h3 { margin: 0; font-size: 20px; line-height: 1.35; }
+    .section-note { max-width: 690px; margin: 7px 0 0; color: var(--muted); }
+    .tiny { color: var(--muted); font-size: 12px; }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; }
+    .summary-card { padding: 17px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,253,247,.82); }
+    .summary-card span { display: block; color: var(--muted); font-size: 12px; }
+    .summary-card strong { display: block; margin-top: 3px; font-size: 17px; }
+    .summary-card.accent { color: #fff; background: var(--rust); border-color: transparent; }
+    .summary-card.accent span { color: rgba(255,255,255,.74); }
+
+    .mode-bar { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 18px; padding: 14px 16px; border-radius: 18px; background: #e1e9dd; }
+    .switch { display: inline-flex; align-items: center; gap: 9px; cursor: pointer; font-weight: 800; }
+    .switch input { width: 20px; height: 20px; accent-color: var(--grass-deep); }
+    body.mainline [data-optional="true"] { display: none !important; }
+
+    .timeline { position: relative; display: grid; gap: 15px; }
+    .day {
+      display: grid;
+      grid-template-columns: 82px minmax(0, 1fr);
+      gap: 15px;
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,253,247,.9);
+      box-shadow: 0 9px 30px rgba(28,60,55,.07);
+    }
+    .day-number { text-align: center; }
+    .day-number b { display: block; color: var(--grass-deep); font-family: Georgia, serif; font-size: 38px; line-height: .95; }
+    .day-number span { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; }
+    .day-tag { display: inline-flex; margin-bottom: 5px; color: var(--rust); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+    .day-title { margin-bottom: 13px; }
+    .events { display: grid; gap: 10px; }
+    .event { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+    .event:first-child { padding-top: 0; border-top: 0; }
+    .event time { color: var(--grass-deep); font-size: 13px; font-weight: 800; }
+    .event p { margin: 0; }
+    .event small { display: block; margin-top: 2px; color: var(--muted); }
+    .optional { color: var(--muted); }
+    .notice { margin-top: 13px; padding: 11px 13px; border-left: 4px solid var(--sun); border-radius: 10px; background: #fff1d7; font-size: 13px; }
+    .notice.alert { border-left-color: var(--rust); background: #fce6dc; }
+
+    .cards { display: grid; gap: 13px; }
+    .info-card { padding: 21px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+    .info-card p { margin: 8px 0 0; color: var(--muted); }
+    .steps { display: grid; gap: 9px; margin-top: 15px; }
+    .step { display: flex; align-items: flex-start; gap: 10px; }
+    .step-mark { flex: 0 0 auto; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--grass-deep); color: white; font-size: 12px; }
+    details { margin-top: 13px; padding-top: 12px; border-top: 1px dashed var(--line); }
+    summary { color: var(--grass-deep); font-weight: 800; cursor: pointer; }
+
+    .line-card { overflow: hidden; padding: 0; }
+    .line-head { padding: 21px; color: white; background: var(--grass-deep); }
+    .line-route { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 20px; }
+    .place { padding: 6px 10px; border-radius: 999px; background: #edf1e8; font-size: 13px; font-weight: 700; }
+    .arrow { color: var(--rust); }
+
+    .check-wrap { padding: 23px; color: white; border-radius: 31px; background: var(--ink); box-shadow: var(--shadow); }
+    .check-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .progress { height: 9px; margin: 16px 0 20px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.17); }
+    .progress span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--sun); transition: width .25s ease; }
+    .checklist { display: grid; gap: 9px; }
+    .checkitem { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; padding: 11px 12px; border-radius: 13px; background: rgba(255,255,255,.075); cursor: pointer; }
+    .checkitem input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--sun); }
+    .checkitem small { display: block; color: rgba(255,255,255,.63); }
+
+    .budget { display: grid; gap: 13px; }
+    .calc { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+    .calc-grid { display: grid; grid-template-columns: minmax(0,1fr) 124px; gap: 12px; align-items: center; margin-top: 11px; }
+    .calc input, .calc select { width: 100%; padding: 9px 11px; border: 1px solid var(--line); border-radius: 11px; color: var(--ink); background: white; }
+    .total { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+    .total strong { display: block; color: var(--grass-deep); font-size: 33px; }
+    .cost-list { display: grid; gap: 9px; margin-top: 14px; }
+    .cost-row { display: flex; justify-content: space-between; gap: 14px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+    .cost-row strong { white-space: nowrap; }
+
+    .source-note { padding: 18px 20px; border: 1px solid rgba(76,153,167,.28); border-radius: 20px; color: var(--muted); background: rgba(220,235,234,.72); }
+    footer { padding: 26px 0 48px; color: var(--muted); text-align: center; font-size: 13px; }
+
+    @media (min-width: 800px) {
+      .hero-grid { grid-template-columns: 1.08fr .92fr; }
+      .summary-grid { grid-template-columns: repeat(4, 1fr); }
+      .cards { grid-template-columns: repeat(3, 1fr); }
+      .budget { grid-template-columns: 1fr 1fr; }
+      .checklist { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 590px) {
+      .wrap { width: min(100% - 22px, 1140px); }
+      .topbar { padding-top: 12px; }
+      .hero-copy, .route-card { border-radius: 26px; }
+      .hero-copy { min-height: 430px; }
+      .route-card, .route-card svg { min-height: 410px; }
+      .section-head { display: block; }
+      .day { grid-template-columns: 54px minmax(0,1fr); padding: 16px 14px; gap: 10px; }
+      .day-number b { font-size: 30px; }
+      .event { grid-template-columns: 51px minmax(0,1fr); }
+      .mode-bar { align-items: flex-start; }
+      .back-link { max-width: 132px; text-align: right; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .route-dash { animation: none; }
+    }
+    @media print {
+      body { background: white; }
+      .quick-nav, .mode-bar, .check-wrap, .calc, .topbar { display: none !important; }
+      .hero-copy, .route-card, .day, .info-card { box-shadow: none; break-inside: avoid; }
+      section { padding: 20px 0; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#route">跳到行程</a>
+
+  <header class="wrap">
+    <div class="topbar">
+      <a class="brand" href="#top" aria-label="返回内蒙古路线顶部"><span class="brand-mark">北</span><span>远方手册</span></a>
+      <a class="back-link" href="../">← 返回贵阳旅行页</a>
+    </div>
+
+    <div class="hero" id="top">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">EIGHT DAYS · GRASSLAND & FOREST</p>
+          <h1>向北，<br>去草原。<span>内蒙古 8 日旅行计划</span></h1>
+          <p class="hero-sub">从哈尔滨坐一夜火车抵达海拉尔，沿大兴安岭走进根河与莫尔道嘎，再把额尔古纳、草原河曲和阿尔山的晨雾日落串起来。</p>
+          <div class="hero-pills">
+            <span class="pill">9月12日 周六出发</span>
+            <span class="pill">夜行火车</span>
+            <span class="pill">草原＋森林＋湿地</span>
+            <span class="pill">包车日 × 1</span>
+          </div>
+        </div>
+
+        <figure class="route-card" aria-labelledby="route-map-title">
+          <svg viewBox="0 0 620 620" role="img">
+            <title id="route-map-title">哈尔滨、海拉尔、根河、莫尔道嘎、额尔古纳与阿尔山路线示意图</title>
+            <defs>
+              <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bce0e2"/><stop offset="1" stop-color="#edf1dc"/></linearGradient>
+              <filter id="mapShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#173c3a" flood-opacity=".17"/></filter>
+              <marker id="routeArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#c76b46"/></marker>
+            </defs>
+            <rect width="620" height="620" fill="url(#skyGradient)"/>
+            <circle cx="490" cy="112" r="53" fill="#f0b74f" opacity=".88"/>
+            <g fill="#fff" opacity=".68"><ellipse cx="140" cy="105" rx="71" ry="21"/><ellipse cx="210" cy="106" rx="53" ry="17"/></g>
+            <path d="M0 410 Q94 322 191 391 T374 361 T620 382 V620 H0Z" fill="#6f9364"/>
+            <path d="M0 471 Q116 405 229 454 T430 421 T620 442 V620 H0Z" fill="#466f5f"/>
+            <path d="M75 620 Q154 520 238 575 T399 543 T570 582" fill="none" stroke="#83c5d0" stroke-width="24" opacity=".78"/>
+            <g fill="#234f48" opacity=".83">
+              <path d="M51 407 l31 -74 31 74h-20l29 54H41l28-54z"/><path d="M111 429 l26-62 27 62h-17l23 43H102l23-43z"/>
+              <path d="M481 395 l29-70 30 70h-19l27 51h-76l25-51z"/>
+            </g>
+            <path class="route-dash" d="M520 505 C481 455 404 454 356 388 C309 324 211 342 179 273 C153 217 247 169 334 201 C416 231 487 190 513 256" fill="none" stroke="#c76b46" stroke-width="7" stroke-linecap="round" marker-end="url(#routeArrow)"/>
+            <g font-family="Microsoft YaHei, sans-serif" font-weight="700" text-anchor="middle" filter="url(#mapShadow)">
+              <g transform="translate(520 505)"><circle r="13" fill="#fffdf7" stroke="#173c3a" stroke-width="5"/><rect x="-44" y="20" width="88" height="31" rx="15" fill="#173c3a"/><text y="41" fill="white" font-size="15">哈尔滨</text></g>
+              <g transform="translate(356 388)"><circle r="13" fill="#fffdf7" stroke="#173c3a" stroke-width="5"/><rect x="-39" y="20" width="78" height="31" rx="15" fill="#173c3a"/><text y="41" fill="white" font-size="15">海拉尔</text></g>
+              <g transform="translate(179 273)"><circle r="13" fill="#fffdf7" stroke="#173c3a" stroke-width="5"/><rect x="-35" y="20" width="70" height="31" rx="15" fill="#173c3a"/><text y="41" fill="white" font-size="15">根河</text></g>
+              <g transform="translate(334 201)"><circle r="13" fill="#fffdf7" stroke="#173c3a" stroke-width="5"/><rect x="-47" y="-52" width="94" height="31" rx="15" fill="#173c3a"/><text y="-31" fill="white" font-size="15">莫尔道嘎</text></g>
+              <g transform="translate(513 256)"><circle r="13" fill="#fffdf7" stroke="#173c3a" stroke-width="5"/><rect x="-43" y="20" width="86" height="31" rx="15" fill="#173c3a"/><text y="41" fill="white" font-size="15">额尔古纳</text></g>
+              <g transform="translate(420 96)"><circle r="11" fill="#fffdf7" stroke="#173c3a" stroke-width="4"/><text x="-44" y="7" fill="#173c3a" font-size="16">阿尔山</text></g>
+            </g>
+          </svg>
+          <figcaption class="route-caption">路线概念图 · 不按地理比例</figcaption>
+        </figure>
+      </div>
+    </div>
+  </header>
+
+  <nav class="quick-nav" aria-label="页面目录">
+    <div class="wrap quick-nav-inner"><a href="#route">逐日路线</a><a href="#highlights">玩法重点</a><a href="#booking">待办清单</a><a href="#budget">费用估算</a><a href="#notes">原图说明</a></div>
+  </nav>
+
+  <main>
+    <section class="wrap" aria-label="行程摘要">
+      <div class="summary-grid">
+        <div class="summary-card"><span>去程航班</span><strong>08:35 杭州 → 13:55 哈尔滨</strong></div>
+        <div class="summary-card"><span>夜行交通</span><strong>K927 · 哈尔滨西 → 海拉尔</strong></div>
+        <div class="summary-card"><span>北线关键词</span><strong>白桦林 · 湿地 · 河曲 · 晨雾</strong></div>
+        <div class="summary-card accent"><span>最重要的事</span><strong>先确认 Day 7–8 长途衔接</strong></div>
+      </div>
+    </section>
+
+    <section id="route" class="wrap">
+      <div class="section-head"><div><h2>八天，沿森林去草原</h2><p class="section-note">班次、时间与费用按截图整理；可选体验可一键隐藏，方便只看主线。</p></div></div>
+      <div class="mode-bar">
+        <div><strong>只看交通主线</strong><div class="tiny">隐藏骑马、拍照、纪念品等可选内容。</div></div>
+        <label class="switch"><input id="mainlineToggle" type="checkbox">开启</label>
+      </div>
+
+      <div class="timeline">
+        <article class="day">
+          <div class="day-number"><b>01</b><span>9月12日<br>周六</span></div>
+          <div>
+            <span class="day-tag">杭州 → 哈尔滨 → 海拉尔</span>
+            <h3 class="day-title">飞机接夜火车，把白天留给赶路</h3>
+            <div class="events">
+              <div class="event"><time>08:35</time><p>长龙航空 GJ8647 从杭州萧山 T3 起飞。<small>截图显示经停佛山约 45 分钟，13:55 抵达哈尔滨太平 T2；票价 ¥386 起。</small></p></div>
+              <div class="event"><time>抵达后</time><p>乘机场大巴火车站线前往哈尔滨西站。<small>截图参考：约 1 小时 19 分、步行约 498 米、约 30 分钟一班。</small></p></div>
+              <div class="event"><time>18:19</time><p>哈尔滨西站乘 K927，次日 05:09 抵达海拉尔。<small>全程约 10 小时 50 分；截图价硬座 ¥102、硬卧 ¥178。</small></p></div>
+            </div>
+            <div class="notice">航班与火车之间约 4 小时 24 分，仍要把取行李、市内交通、安检候车算进去。</div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-number"><b>02</b><span>海拉尔<br>根河</span></div>
+          <div>
+            <span class="day-tag">海拉尔 → 根河</span>
+            <h3 class="day-title">清晨接大巴，午后去驯鹿部落</h3>
+            <div class="events">
+              <div class="event"><time>07:30</time><p>海拉尔客运站乘大巴前往根河。<small>约 3.5 小时，截图票价 ¥62。</small></p></div>
+              <div class="event"><time>11:30</time><p>回酒店补觉、洗漱，休息至 13:00。</p></div>
+              <div class="event" data-optional="true"><time>午后</time><p>二选一：约 61 公里、1 小时拼车去群英沟阿尤莎部落；或约 45 公里、45 分钟拼车去敖鲁古雅部落。</p></div>
+              <div class="event" data-optional="true"><time>提示</time><p class="optional">与动物近距离接触可能沾味，穿方便换洗的衣服；原图特别提醒可以买一个玩偶留念。</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-number"><b>03</b><span>根河<br>莫尔道嘎</span></div>
+          <div>
+            <span class="day-tag">根河 → 莫尔道嘎</span>
+            <h3 class="day-title">穿过白桦林，进入大兴安岭腹地</h3>
+            <div class="events">
+              <div class="event"><time>上午</time><p>从根河乘大巴前往莫尔道嘎。<small>截图未列具体发车时间与票价，订票时补齐。</small></p></div>
+              <div class="event"><time>抵达后</time><p>约 12 公里拼车前往莫尔道嘎森林公园。</p></div>
+              <div class="event" data-optional="true"><time>园内</time><p class="optional">乘小火车穿行白桦林；班次和运营状态到现场确认。</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-number"><b>04</b><span>莫尔道嘎<br>额尔古纳</span></div>
+          <div>
+            <span class="day-tag">莫尔道嘎 → 额尔古纳</span>
+            <h3 class="day-title">湿地、学骑马，再去山包等日落</h3>
+            <div class="events">
+              <div class="event"><time>08:00</time><p>莫尔道嘎客运站乘大巴前往额尔古纳。<small>约 3 小时，截图票价 ¥45。</small></p></div>
+              <div class="event"><time>上午</time><p>车站约 300 米外就是额尔古纳湿地，可放下行李后安排游览。</p></div>
+              <div class="event" data-optional="true"><time>14:00</time><p>前往小江马场学骑马。</p></div>
+              <div class="event" data-optional="true"><time>16:30</time><p>从马场前往生产四队看日落，截图参考包车往返 ¥30/人。</p></div>
+            </div>
+            <div class="notice">若生产四队关闭，可在小江马场对面的山包看日落；原图建议带长焦镜头。</div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-number"><b>05</b><span>额尔古纳<br>环线</span></div>
+          <div>
+            <span class="day-tag">拉莫线＋卡线一日</span>
+            <h3 class="day-title">包车走一整天，把风景留在路上</h3>
+            <div class="events">
+              <div class="event"><time>全天</time><p>提前联系包车师傅，说明要走卡线。<small>截图参考：基础 ¥500/车；增加室韦后 ¥620/车。</small></p></div>
+              <div class="event"><time>线路</time><p>额尔古纳市区 → 白桦林 → 旧国道 → 室韦 → 恩和 → 卡线 → 乌兰山 → 黑山头。</p></div>
+              <div class="event" data-optional="true"><time>恩和</time><p class="optional">主要去后山看“笑脸河”。午饭听司机建议，沿途本身就能看到景区般的风景。</p></div>
+              <div class="event"><time>19:30</time><p>按截图计划回到额尔古纳市区，结束当天行程。</p></div>
+            </div>
+            <div class="notice">原图备注“全部不进景区花门票”。实际路线终点与返程需要在出发前和司机再次确认。</div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-number"><b>06</b><span>海拉尔<br>草原</span></div>
+          <div>
+            <span class="day-tag">额尔古纳 → 海拉尔</span>
+            <h3 class="day-title">上午返城，下午等莫尔格勒河落日</h3>
+            <div class="events">
+              <div class="event"><time>上午</time><p>乘大巴返回海拉尔。<small>截图未列班次与票价，作为待订项。</small></p></div>
+              <div class="event"><time>下午</time><p>前往莫尔格勒河“九曲十八弯”，把游览时间留到日落前后。</p></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-number"><b>07</b><span>阿尔山<br>晨雾</span></div>
+          <div>
+            <span class="day-tag">阿尔山</span>
+            <h3 class="day-title">清晨看湖雾，傍晚等牛群入画</h3>
+            <div class="events">
+              <div class="event"><time>清晨</time><p>乌苏浪子湖看晨雾。</p></div>
+              <div class="event"><time>下午</time><p>不冻河看日落，原图提示傍晚太阳最好，常能看到牛群吃草。</p></div>
+            </div>
+            <div class="notice alert">截图没有提供“海拉尔 → 阿尔山”的交通、出发时间与住宿信息；这是整条路线最先要补齐的衔接。</div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="day-number"><b>08</b><span>晨雾<br>骑马</span></div>
+          <div>
+            <span class="day-tag">白鹿岛 · 黑山头</span>
+            <h3 class="day-title">日出晨雾开场，蒙古包落日收尾</h3>
+            <div class="events">
+              <div class="event"><time>清晨</time><p>白鹿岛看晨雾与日出。</p></div>
+              <div class="event" data-optional="true"><time>傍晚</time><p>黑山头骑马看日落，晚上住蒙古包。</p></div>
+            </div>
+            <div class="notice alert">白鹿岛、阿尔山与黑山头相距较远，原图未列这一天的交通顺序。页面保留原图愿望清单，但不要在衔接确认前同时下单。</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="highlights" class="wrap">
+      <div class="section-head"><div><h2>三段重点，怎么玩</h2><p class="section-note">把最有辨识度的体验挑出来，其余根据体力和交通删减。</p></div></div>
+      <div class="cards">
+        <article class="info-card">
+          <h3>森林线｜根河—莫尔道嘎</h3>
+          <p>驯鹿部落、白桦林和森林小火车是这一段的核心。衣服以好走、耐脏、方便换洗为先。</p>
+          <div class="steps"><div class="step"><span class="step-mark">1</span><span>驯鹿部落二选一，不必两处都去。</span></div><div class="step"><span class="step-mark">2</span><span>拼车去森林公园，先问好返程。</span></div><div class="step"><span class="step-mark">3</span><span>小火车作为可选，避免被固定班次绑住。</span></div></div>
+        </article>
+        <article class="info-card line-card">
+          <div class="line-head"><h3>卡线｜风景就在公路边</h3><p style="color:rgba(255,255,255,.7)">包车前把停靠点、返程城市和是否含室韦写清楚。</p></div>
+          <div class="line-route"><span class="place">额尔古纳</span><span class="arrow">→</span><span class="place">白桦林</span><span class="arrow">→</span><span class="place">室韦</span><span class="arrow">→</span><span class="place">恩和</span><span class="arrow">→</span><span class="place">乌兰山</span><span class="arrow">→</span><span class="place">黑山头</span></div>
+        </article>
+        <article class="info-card">
+          <h3>光线线｜晨雾与日落</h3>
+          <p>这条路线最值钱的不是打卡数量，而是赶到对的光线：湖面晨雾、河曲落日、草原牛群。</p>
+          <div class="steps"><div class="step"><span class="step-mark">晨</span><span>乌苏浪子湖、白鹿岛：提前查日出时间。</span></div><div class="step"><span class="step-mark">昏</span><span>莫尔格勒河、不冻河、黑山头：预留返程。</span></div><div class="step"><span class="step-mark">镜</span><span>山包看日落可带长焦，草原拍人像也更灵活。</span></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="booking" class="wrap">
+      <div class="check-wrap">
+        <div class="check-top"><div><h2>出发前待办</h2><span class="tiny" style="color:rgba(255,255,255,.67)">勾选状态保存在当前浏览器。</span></div><strong id="progressText">0 / 10</strong></div>
+        <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+        <div class="checklist" id="checklist">
+          <label class="checkitem"><input type="checkbox" data-id="flight"><span>确认杭州 → 哈尔滨航班<small>核实是否仍经停佛山及实际到达航站楼</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="night-train"><span>购买 K927 卧铺<small>哈尔滨西 18:19 → 海拉尔 05:09+1</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="airport-transfer"><span>复查机场大巴运营时间<small>航班延误时准备网约车备选</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="hailar-genhe"><span>确认海拉尔 → 根河 07:30 大巴<small>截图参考 3.5 小时、¥62</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="tribe-car"><span>预约根河驯鹿部落拼车<small>群英沟阿尤莎 / 敖鲁古雅二选一</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="moerdaoga"><span>确认根河 → 莫尔道嘎班次<small>以及森林公园往返拼车</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="erguna-bus"><span>确认莫尔道嘎 → 额尔古纳 08:00 大巴<small>截图参考 3 小时、¥45</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="day-car"><span>预订卡线包车<small>明确 ¥500 / 含室韦 ¥620、路线与回程终点</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="arxan-transfer"><span>补齐海拉尔 → 阿尔山交通<small>这是当前最关键的缺口</small></span></label>
+          <label class="checkitem"><input type="checkbox" data-id="day-eight"><span>重排 Day 8 地理顺序<small>白鹿岛与黑山头是否能同日完成需确认</small></span></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="budget" class="wrap">
+      <div class="section-head"><div><h2>截图价格，先算一遍</h2><p class="section-note">这里只计算原图中出现的交通价格；住宿、骑马、拼车与未标价班次另加。</p></div></div>
+      <div class="budget">
+        <div class="calc">
+          <h3>费用计算器</h3>
+          <div class="calc-grid"><label for="people">出行人数</label><input id="people" type="number" inputmode="numeric" min="1" max="12" value="2"></div>
+          <div class="calc-grid"><label for="flightRate">航班/人</label><input id="flightRate" type="number" inputmode="numeric" min="0" value="386"></div>
+          <div class="calc-grid"><label for="trainRate">火车/人</label><input id="trainRate" type="number" inputmode="numeric" min="0" value="178"></div>
+          <div class="calc-grid"><label for="carRate">卡线包车</label><select id="carRate"><option value="620">含室韦 · ¥620/车</option><option value="500">基础线 · ¥500/车</option></select></div>
+          <div class="calc-grid"><label for="extraCost">住宿与其他</label><input id="extraCost" type="number" inputmode="numeric" min="0" value="0"></div>
+          <div class="total"><span>已知项目合计</span><strong id="grandTotal">¥2,022</strong><small class="tiny">含航班、K927 硬卧、两段截图有价大巴、生产四队往返和卡线包车。</small></div>
+        </div>
+        <div class="info-card">
+          <h3>默认按 2 人计算</h3>
+          <div class="cost-list">
+            <div class="cost-row"><span>杭州 → 哈尔滨航班</span><strong>¥386/人起</strong></div>
+            <div class="cost-row"><span>K927 硬卧</span><strong>¥178/人</strong></div>
+            <div class="cost-row"><span>海拉尔 → 根河</span><strong>¥62/人</strong></div>
+            <div class="cost-row"><span>莫尔道嘎 → 额尔古纳</span><strong>¥45/人</strong></div>
+            <div class="cost-row"><span>生产四队看日落往返</span><strong>¥30/人</strong></div>
+            <div class="cost-row"><span>卡线包车（含室韦）</span><strong>¥620/车</strong></div>
+          </div>
+          <p>页面没有把“¥386 起”当成锁定票价。正式预订时以平台结算价为准。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="notes" class="wrap">
+      <div class="source-note"><strong>内容来源：</strong>本页完全根据你提供的 3 张备忘录截图整理。截图中没有出现的票价、发车时间、住宿和景区开放信息均未自行补写；其中 Day 7–8 的跨区域交通已在页面中醒目标注为待确认。</div>
+    </section>
+  </main>
+
+  <footer class="wrap">内蒙古路线第一版 · 班次与后半程衔接确认后继续更新</footer>
+
+  <script>
+    (() => {
+      const read = (key, fallback) => {
+        try { return localStorage.getItem(key) ?? fallback; } catch (_) { return fallback; }
+      };
+      const write = (key, value) => {
+        try { localStorage.setItem(key, value); } catch (_) { /* Storage may be unavailable for local files. */ }
+      };
+
+      const mainlineToggle = document.getElementById('mainlineToggle');
+      const savedMode = read('inner-mongolia-mainline', 'false') === 'true';
+      mainlineToggle.checked = savedMode;
+      document.body.classList.toggle('mainline', savedMode);
+      mainlineToggle.addEventListener('change', () => {
+        document.body.classList.toggle('mainline', mainlineToggle.checked);
+        write('inner-mongolia-mainline', String(mainlineToggle.checked));
+      });
+
+      const checklist = Array.from(document.querySelectorAll('#checklist input[type="checkbox"]'));
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      const updateProgress = () => {
+        const done = checklist.filter((item) => item.checked).length;
+        const percent = checklist.length ? Math.round(done / checklist.length * 100) : 0;
+        progressText.textContent = `${done} / ${checklist.length}`;
+        progressBar.style.width = `${percent}%`;
+      };
+      checklist.forEach((item) => {
+        item.checked = read(`inner-mongolia-check-${item.dataset.id}`, 'false') === 'true';
+        item.addEventListener('change', () => {
+          write(`inner-mongolia-check-${item.dataset.id}`, String(item.checked));
+          updateProgress();
+        });
+      });
+      updateProgress();
+
+      const budgetIds = ['people', 'flightRate', 'trainRate', 'carRate', 'extraCost'];
+      const budgetInputs = budgetIds.map((id) => document.getElementById(id));
+      const grandTotal = document.getElementById('grandTotal');
+      const calculate = () => {
+        const people = Math.max(1, Number(budgetInputs[0].value) || 1);
+        const flight = Math.max(0, Number(budgetInputs[1].value) || 0);
+        const train = Math.max(0, Number(budgetInputs[2].value) || 0);
+        const car = Math.max(0, Number(budgetInputs[3].value) || 0);
+        const extra = Math.max(0, Number(budgetInputs[4].value) || 0);
+        const perPersonKnown = flight + train + 62 + 45 + 30;
+        grandTotal.textContent = `¥${Math.round(perPersonKnown * people + car + extra).toLocaleString('zh-CN')}`;
+      };
+      budgetInputs.forEach((input) => {
+        input.value = read(`inner-mongolia-budget-${input.id}`, input.value);
+        input.addEventListener('input', () => {
+          write(`inner-mongolia-budget-${input.id}`, input.value);
+          calculate();
+        });
+        input.addEventListener('change', calculate);
+      });
+      calculate();
+    })();
+  </script>
+</body>
+</html>
+
